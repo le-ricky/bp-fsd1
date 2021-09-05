@@ -1,17 +1,18 @@
 const express = require('express')
-const mongoose = require('mongoose');
+
 const morgan = require('morgan')
 // const bodyParser = require('body-parser')
 const cors = require('cors')
 require('dotenv').config()
 const app = express();
 const path = require('path');
-
+const mongoose = require('mongoose');
 
 //mongoDB
 mongoose.connect(process.env.DATABASE_CLOUD, { useNewUrlParser: true,  useUnifiedTopology: true })
 .then( () => console.log('DB connected'))
 .catch( err => console.log(err))
+mongoose.set('useCreateIndex', true);
 
 //
 app.use(express.static(path.join(__dirname, '../client/build')));
